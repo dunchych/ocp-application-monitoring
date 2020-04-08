@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: liberty-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: liberty-app
+  template:
+    metadata:
+      labels:
+        app: liberty-app
+    spec:
+      containers:
+      - name: liberty-app
+        image: yarod/microprofile-monitoring
+        ports:
+        - name: web
+          containerPort: 9080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: liberty-app
+  labels:
+    app: liberty-app
+spec:
+  selector:
+    app: liberty-app
+  ports:
+  - name: web
+    port: 9080

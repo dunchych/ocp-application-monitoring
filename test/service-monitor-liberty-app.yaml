@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    team: frontend
+  name: liberty-app
+spec:
+  endpoints:
+    - port: web
+  namespaceSelector:
+    matchNames:
+      - yaro-dev
+  selector:
+    matchLabels:
+      app: liberty-app
